@@ -9,7 +9,7 @@ public:
 
 	void addFloorRequest(int floorNum, Direction direction);
 	void addCarRequest(int floorNum);
-	void check();
+	void tick();
 
 private:
 	std::set<int> upRequests;

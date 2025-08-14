@@ -2,52 +2,49 @@
 
 Elevator::Elevator(int floors) {
 	this->currentFloor = 1;
-	this->dir = Direction::IDLE;
+	this->direction = Direction::IDLE;
 	this->doorIsOpen = false;
 	this->floors = floors;
 	std::cout << "Elevator has been created at floor 1 and its stands IDLE!" << std::endl;
 }
 
-void Elevator::move(Direction direction) {
+void Elevator::moveOneFloor(Direction direction) {
 	switch (direction) {
-	case Direction::MOVING_UP:
-		if (this->dir == Direction::IDLE) {
-			this->dir = Direction::MOVING_UP;
-		}
+	case Direction::UP:
+		std::cout << "Elevator Going up to floor" << this->getCurrentFloor() + 1 << std::endl;
 		this->currentFloor++;
 		break;
 
-	case Direction::MOVING_DOWN:
-		if (this->dir == Direction::IDLE) {
-			this->dir = Direction::MOVING_DOWN;
-		}
+	case Direction::DOWN:
+		std::cout << "Elevator Going down to floor" << this->getCurrentFloor() - 1 << std::endl;
 		this->currentFloor--;
 		break;
 	}
 }
 
 void Elevator::stop() {
-	this->dir = Direction::IDLE;
+	std::cout << "Elevator stopped at floor " << this->getCurrentFloor() << std::endl;
+	this->direction = Direction::IDLE;
 }
 
 void Elevator::openDoors() {
-	if (this->dir == Direction::IDLE && this->doorIsOpen == false) {
-		this->doorIsOpen = true;
-	}
-	else {
-		std::cout << "There's been techniqual difficulties opening the door!" << std::endl;
-	}
+	std::cout << "Elevator doors opening at floor " << this->getCurrentFloor() << std::endl;
+	this->doorIsOpen = true;
 }
 
 void Elevator::closeDoors() {
-	if (this->dir == Direction::IDLE && this->doorIsOpen == true) {
-		this->doorIsOpen = false;
-	}
-	else {
-		std::cout << "There's been techniqual difficulties opening the door!" << std::endl;
-	}
+	std::cout << "Elevator doors closing at floor " << this->getCurrentFloor() << std::endl;
+	this->doorIsOpen = false;
 }
 
 int Elevator::getCurrentFloor() {
-	return currentFloor;
+	return this->currentFloor;
+}
+
+Direction Elevator::getDirection() {
+	return this->direction;
+}
+
+void Elevator::setDirection(Direction direction) {
+	this->direction = direction;
 }
