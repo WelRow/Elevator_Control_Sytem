@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 #include <iostream>
 
 enum class Direction {
@@ -11,20 +10,21 @@ enum class Direction {
 class Elevator
 {
 public:
-	Elevator(int currentFloor, int floors);
+	Elevator(int floors);
 
-	void move(int desiredFloor);
+	void move(Direction direction);
+	void stop();
+	void openDoors();
+	void closeDoors();
+	int getCurrentFloor();
 	
 
 private:
 	int currentFloor;
 	Direction dir;
 	bool doorIsOpen;
-
 	int floors;
 
-	void stop();
-	void openDoors();
-	void closeDoors();
+	
 };
 
