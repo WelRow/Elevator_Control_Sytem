@@ -1,30 +1,32 @@
 #pragma once
-#include <vector>
 #include <iostream>
 
 enum class Direction {
-	MOVING_UP,
-	MOVING_DOWN,
+	UP,
+	DOWN,
 	IDLE
 };
 
 class Elevator
 {
 public:
-	Elevator(int currentFloor, int floors);
+	Elevator(int floors);
 
-	void move(int desiredFloor);
+	void moveOneFloor(Direction direction);
+	void stop();
+	void openDoors();
+	void closeDoors();
+	int getCurrentFloor();
+	Direction getDirection();
+	void setDirection(Direction direction);
 	
 
 private:
 	int currentFloor;
-	Direction dir;
+	Direction direction;
 	bool doorIsOpen;
-
 	int floors;
 
-	void stop();
-	void openDoors();
-	void closeDoors();
+	
 };
 

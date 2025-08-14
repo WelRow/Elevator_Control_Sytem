@@ -1,16 +1,19 @@
 #pragma once
-#include <vector>
+#include <set>
 #include "Elevator.h"
 
 class Controller
 {
 public:
-	Controller(Elevator elevatorName);
+	Controller(Elevator* existingElevator);
 
-	void addFloorRequest(int floorNum, Direction dir);
+	void addFloorRequest(int floorNum, Direction direction);
 	void addCarRequest(int floorNum);
+	void tick();
 
 private:
-	std::vector<int> upRequests;
-	std::vector<int> downRequests;
+	std::set<int> upRequests;
+	std::set<int, std::greater<int>> downRequests;
+	Elevator* elevator;
+	
 };
