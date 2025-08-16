@@ -84,7 +84,7 @@ void Controller::tick() {
 }
 
 void Controller::addFloorRequest(int floorNum, Direction direction) {
-	if (direction == Direction::UP) {
+	if (floorNum > elevator->getCurrentFloor()) {
 		upRequests.insert(floorNum);
 	}
 	else {

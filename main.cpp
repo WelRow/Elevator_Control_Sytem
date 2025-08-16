@@ -1,12 +1,13 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "Elevator.h"
-#include "Controller.h"
-
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+
+#include "Elevator.h"
+#include "Controller.h"
+#include "UI.h"
 
 int main() {
 
@@ -55,6 +56,9 @@ int main() {
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
 
+	Elevator elevator(8);
+	Controller controller(&elevator);
+
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -72,9 +76,7 @@ int main() {
 		ImGui::NewFrame();
 
 		//imgui window
-		ImGui::Begin("Elevator");
-		ImGui::Text("YO WE DID IT!");
-		ImGui::End();
+		UI::RenderUI(controller, elevator);
 
 		//imgui draw
 		ImGui::Render();
@@ -95,9 +97,6 @@ int main() {
 	// Terminate GLFW before ending the program
 	glfwTerminate();
 	return 0;
-
-	Elevator elevator(8);
-	Controller controller(&elevator);
 
 	controller.addFloorRequest(5, Direction::UP);
 	controller.addCarRequest(9);
