@@ -3,5 +3,5 @@ class Controller;
 class Elevator;
 
 namespace UI {
-	void RenderUI(Controller& controller, Elevator& elevator);
+	void RenderUI(Controller& controller, Elevator& elevator, int numFloors);
 }

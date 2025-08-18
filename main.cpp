@@ -14,8 +14,6 @@ int main() {
 	// Initialize GLFW
 	glfwInit();
 
-
-
 	// Tell GLFW what version of OpenGL we are using 
 	// In this case we are using OpenGL 3.3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -27,8 +25,8 @@ int main() {
 
 
 
-	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
-	GLFWwindow* window = glfwCreateWindow(800, 800, "YoutubeOpenGL", NULL, NULL);
+	// Create a GLFWwindow object of 800 by 800 pixels
+	GLFWwindow* window = glfwCreateWindow(800, 400, "Elevator", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL)
 	{
@@ -40,13 +38,12 @@ int main() {
 	// Introduce the window into the current context
 	glfwMakeContextCurrent(window);
 
-
-
 	//Load GLAD so it configures OpenGL
 	gladLoadGL();
+
 	// Specify the viewport of OpenGL in the Window
 	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
-	glViewport(0, 0, 800, 800);
+	glViewport(0, 0, 800, 400);
 
 	//IMGUI initalization
 	IMGUI_CHECKVERSION();
@@ -59,6 +56,9 @@ int main() {
 	Elevator elevator(8);
 	Controller controller(&elevator);
 
+	double lastTickTime = 0.0;     // Stores the time of the last tick
+	double tickInterval = 1.0;
+
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -70,13 +70,26 @@ int main() {
 		// Clean the back buffer and assign the new color to it
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		// Get the current time from GLFW
+		double currentTime = glfwGetTime();
+
+		// Check if enough time has passed since the last tick
+		if (currentTime - lastTickTime >= tickInterval) {
+
+			// next simulation step
+			controller.tick();
+
+			// Update the last tick time to the current time
+			lastTickTime = currentTime;
+		}
+
 		//imgui setup
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
 		//imgui window
-		UI::RenderUI(controller, elevator);
+		UI::RenderUI(controller, elevator, 12);
 
 		//imgui draw
 		ImGui::Render();

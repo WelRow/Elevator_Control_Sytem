@@ -100,3 +100,12 @@ void Controller::addCarRequest(int floorNum) {
 		downRequests.insert(floorNum);
 	}
 }
+
+std::set<int> Controller::getUpRequests() {
+	return upRequests;
+}
+
+std::set<int, std::greater<int>> Controller::getDownRequests() {
+	return downRequests;
+}
+
