@@ -26,7 +26,7 @@ int main() {
 
 
 	// Create a GLFWwindow object of 800 by 800 pixels
-	GLFWwindow* window = glfwCreateWindow(800, 400, "Elevator", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(800, 450, "Elevator", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL)
 	{
