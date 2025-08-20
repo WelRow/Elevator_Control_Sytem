@@ -15,7 +15,7 @@ const char* DirectionToString(Direction dir) {
 
 namespace UI {
     void RenderUI(Controller& controller, Elevator& elevator, int numFloors) {
-        ImGui::Begin("Elevator Control Panel", 0, ImGuiWindowFlags_NoResize);
+        ImGui::Begin("Elevator Control Panel");
 
         // Get a reference to the request sets for easier access
         const auto& upRequests = controller.getUpRequests();
